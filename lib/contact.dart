@@ -1,24 +1,53 @@
 import 'package:contact_app/components/drop_down_button.dart';
 import 'package:contact_app/components/icon_button.dart';
 import 'package:contact_app/components/list_tile.dart';
+import 'package:contact_app/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 
-List<Map<String, dynamic>> listData = [
-  {"name": "dang", "group": "d"},
-  {"name": "linh", "group": "l"},
-  {"name": "thai", "group": "t"},
-  {"name": "nhat", "group": "p"},
-  {"name": "phat", "group": "p"},
-  {"name": "duc", "group": "d"},
-  {"name": "lan", "group": "l"},
-  {"name": "long", "group": "l"},
-  {"name": "dat", "group": "d"},
-  {"name": "son", "group": "s"},
-  {"name": "hai", "group": "h"},
-  {"name": "dat", "group": "pinned"},
-  {"name": "son", "group": "pinned"},
-  {"name": "hai", "group": "pinned"},
+List<User> listUser = const [
+  User(
+      name: "nguyen hai dang",
+      description: "mobile developer",
+      email: "dang@gmail.com",
+      phoneNumber: "0123456789",
+      avatarUrl: "",
+      group: "D"),
+  User(
+      name: "le nhut linh",
+      description: "web developer",
+      email: "linh@gmail.com",
+      phoneNumber: "0123456789",
+      avatarUrl: "",
+      group: "L"),
+  User(
+      name: "nguyen tan phat",
+      description: "frontend developer",
+      email: "phat@gmail.com",
+      phoneNumber: "0123456789",
+      avatarUrl: "",
+      group: "P"),
+  User(
+      name: "le minh duc",
+      description: "UI/UX designer",
+      email: "duc@gmail.com",
+      phoneNumber: "0123456789",
+      avatarUrl: "",
+      group: "D"),
+  User(
+      name: "tran quan vinh",
+      description: "backend developer",
+      email: "vinh@gmail.com",
+      phoneNumber: "0123456789",
+      avatarUrl: "",
+      group: "V"),
+  User(
+      name: "vo phong vu",
+      description: "IT helpdesk",
+      email: "vu@gmail.com",
+      phoneNumber: "0123456789",
+      avatarUrl: "",
+      group: "V")
 ];
 
 class MyContact extends StatelessWidget {
@@ -107,8 +136,8 @@ class MyContact extends StatelessWidget {
           ),
           Flexible(
             child: GroupedListView(
-              elements: listData,
-              groupBy: (data) => data["group"],
+              elements: listUser,
+              groupBy: (user) => user.group,
               groupSeparatorBuilder: (String groupByValue) => Padding(
                 padding: const EdgeInsets.only(left: 12.0, top: 24.0),
                 child: Text(
@@ -117,12 +146,13 @@ class MyContact extends StatelessWidget {
                       color: Color.fromARGB(255, 130, 130, 130)),
                 ),
               ),
-              itemBuilder: (context, element) {
+              itemBuilder: (context, user) {
                 return MyListTile(
-                  firstFieldSubTitle: element["name"].toString(),
-                  secondFieldSubtitle: "developer",
-                  secondFieldTitle: "123 456 789",
-                  firstFieldTitle: "haidang@gmail.con",
+                  firstFieldSubTitle: user.name,
+                  secondFieldSubtitle: user.description,
+                  secondFieldTitle: user.phoneNumber,
+                  firstFieldTitle: user.email,
+                  avatarUrl: user.group,
                 );
               },
             ),

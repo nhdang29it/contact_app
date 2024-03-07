@@ -6,6 +6,7 @@ class MyListTile extends StatelessWidget {
       required this.secondFieldSubtitle,
       required this.secondFieldTitle,
       required this.firstFieldTitle,
+      required this.avatarUrl,
       this.onTap,
       super.key});
 
@@ -13,7 +14,8 @@ class MyListTile extends StatelessWidget {
   final String firstFieldTitle,
       secondFieldTitle,
       firstFieldSubTitle,
-      secondFieldSubtitle;
+      secondFieldSubtitle,
+      avatarUrl;
 
   // final backgroundColor = Colors.black;
   final textColor = Colors.white;
@@ -31,7 +33,7 @@ class MyListTile extends StatelessWidget {
       child: Row(
         children: [
           CircleAvatar(
-            child: Text("T"),
+            child: Text(avatarUrl),
           ),
           const SizedBox(
             width: 8,
