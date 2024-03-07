@@ -1,11 +1,47 @@
+import 'package:contact_app/components/side_bar/input_field.dart';
+import 'package:contact_app/components/side_bar/sidebar_list_tile.dart';
+import 'package:contact_app/contrast.dart';
+import 'package:contact_app/models/side_bar_item.dart';
 import 'package:flutter/material.dart';
 
-class MySideBar extends StatelessWidget {
+class MySideBar extends StatefulWidget {
   const MySideBar({super.key});
 
+  @override
+  State<MySideBar> createState() => _MySideBarState();
+}
+
+class _MySideBarState extends State<MySideBar> {
   final double listTileFontSize = 14;
+
   final FontWeight listTileFontWeight = FontWeight.w600;
-  final Color textColor = Colors.white;
+
+  String currentTitle = "";
+
+  final textTileColor = const Color(0xffcecece);
+  final List<SideBarItemModel> listSideBarItemModel = const [
+    SideBarItemModel(title: "All people", icon: Icons.person_outline_outlined),
+    SideBarItemModel(
+        title: "All Bussinesses", icon: Icons.business_center_outlined),
+    SideBarItemModel(title: "Favorites", icon: Icons.star_border),
+    SideBarItemModel(title: "Tags", icon: Icons.question_mark_outlined),
+    SideBarItemModel(title: "Smart Tags", icon: Icons.smart_toy),
+    SideBarItemModel(title: "Events", icon: Icons.arrow_forward_ios_rounded),
+  ];
+
+  List<SideBarItemModel> filterSideBarItemModel = [];
+
+  void reset() {
+    setState(() {
+      filterSideBarItemModel = [...listSideBarItemModel];
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    filterSideBarItemModel = [...listSideBarItemModel];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,46 +50,34 @@ class MySideBar extends StatelessWidget {
       child: Container(
         decoration: const BoxDecoration(
             // color: Colors.blue,
-            border: Border(
-                right: BorderSide(color: Color.fromARGB(183, 182, 182, 182)))),
+            border: Border(right: BorderSide(color: borderColor))),
         padding: const EdgeInsets.only(right: 8),
         child: Column(
           children: [
-            SizedBox(
-              height: 120,
-              // color: Colors.amberAccent,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ListTile(
-                    title: Text("Alloy", style: TextStyle(color: textColor)),
-                    trailing: Icon(
-                      Icons.notifications,
-                      color: textColor,
-                    ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const ListTile(
+                  title: Text("Alloy", style: TextStyle(color: textColor)),
+                  trailing: Icon(
+                    Icons.notifications,
+                    color: textColor,
                   ),
-                  const Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 6.0, horizontal: 4.0),
-                    child: TextField(
-                      decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.search),
-                          hintText: "Search",
-                          hintStyle: TextStyle(fontWeight: FontWeight.bold),
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color.fromARGB(255, 239, 239, 239),
-                                width: 2.0,
-                              ),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12))),
-                          contentPadding: EdgeInsets.all(1.0),
-                          fillColor: Color.fromARGB(255, 215, 215, 215),
-                          filled: true),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 6.0, horizontal: 4.0),
+                  child: MyInputField(onChanged: (value) {
+                    setState(() {
+                      filterSideBarItemModel = listSideBarItemModel
+                          .where((element) => element.title
+                              .toLowerCase()
+                              .contains(value.toLowerCase()))
+                          .toList();
+                    });
+                  }),
+                ),
+              ],
             ),
             Flexible(
               child: ListView(
@@ -61,73 +85,22 @@ class MySideBar extends StatelessWidget {
                   const SizedBox(
                     height: 15,
                   ),
-                  ListTile(
-                    title: Text(
-                      "All Peple",
-                      style: TextStyle(
-                          fontSize: listTileFontSize,
-                          fontWeight: listTileFontWeight,
-                          color: textColor),
-                    ),
-                    leading:
-                        Icon(Icons.person_outline_outlined, color: textColor),
-                    selected: true,
-                    selectedTileColor: const Color.fromARGB(255, 154, 154, 154),
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(8))),
-                  ),
-                  ListTile(
-                    title: Text(
-                      "All Bussinesses",
-                      style: TextStyle(
-                          fontSize: listTileFontSize,
-                          fontWeight: listTileFontWeight,
-                          color: textColor),
-                    ),
-                    leading:
-                        Icon(Icons.business_center_outlined, color: textColor),
-                  ),
-                  ListTile(
-                    title: Text(
-                      "Favorites",
-                      style: TextStyle(
-                          fontSize: listTileFontSize,
-                          fontWeight: listTileFontWeight,
-                          color: textColor),
-                    ),
-                    leading: Icon(Icons.star_border, color: textColor),
-                  ),
-                  ListTile(
-                    title: Text(
-                      "Tag",
-                      style: TextStyle(
-                          fontSize: listTileFontSize,
-                          fontWeight: listTileFontWeight,
-                          color: textColor),
-                    ),
-                    leading:
-                        Icon(Icons.question_mark_outlined, color: textColor),
-                  ),
-                  ListTile(
-                    title: Text(
-                      "Smart Tags",
-                      style: TextStyle(
-                          fontSize: listTileFontSize,
-                          fontWeight: listTileFontWeight,
-                          color: textColor),
-                    ),
-                    leading: Icon(Icons.smart_toy, color: textColor),
-                  ),
-                  ListTile(
-                    title: Text(
-                      "Events",
-                      style: TextStyle(
-                          fontSize: listTileFontSize,
-                          fontWeight: listTileFontWeight,
-                          color: textColor),
-                    ),
-                    leading: Icon(Icons.event, color: textColor),
-                  ),
+                  for (final SideBarItemModel item in filterSideBarItemModel)
+                    SideBarListTile(
+                        title: item.title,
+                        listTileFontSize: listTileFontSize,
+                        listTileFontWeight: listTileFontWeight,
+                        textTileColor: textTileColor,
+                        onTap: () {
+                          setState(() {
+                            currentTitle = item.title;
+                          });
+                        },
+                        selected: item.title == currentTitle,
+                        textColor: textColor,
+                        selectedTileColor:
+                            const Color.fromARGB(255, 81, 81, 81),
+                        leadingIcon: item.icon),
                   const SizedBox(
                     height: 15,
                   ),
@@ -137,7 +110,7 @@ class MySideBar extends StatelessWidget {
                       height: 70,
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 214, 214, 214),
+                          color: bgTileColor,
                           borderRadius:
                               BorderRadius.all(Radius.circular(10.0))),
                       child: Row(
@@ -152,13 +125,14 @@ class MySideBar extends StatelessWidget {
                                 "UNTAGGED",
                                 style: TextStyle(
                                   fontSize: listTileFontSize,
-                                  color: const Color.fromARGB(255, 95, 95, 95),
+                                  fontWeight: listTileFontWeight,
+                                  color: const Color(0xff585858),
                                 ),
                               ),
                               Text(
                                 "41",
                                 style: TextStyle(
-                                    fontSize: listTileFontSize,
+                                    fontSize: listTileFontSize + 2,
                                     color: textColor,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -193,8 +167,8 @@ class MySideBar extends StatelessWidget {
                 ],
               ),
             ),
-            ListTile(
-              leading: const CircleAvatar(
+            const ListTile(
+              leading: CircleAvatar(
                 child: Text("D"),
               ),
               title: Text(

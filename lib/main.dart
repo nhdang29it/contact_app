@@ -1,4 +1,5 @@
 import 'package:contact_app/contact.dart';
+import 'package:contact_app/contrast.dart';
 import 'package:contact_app/side_bar.dart';
 import 'package:contact_app/upcomming_activity.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       themeMode: ThemeMode.dark,
+      darkTheme: ThemeData.dark(
+        useMaterial3: true,
+      ),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
             seedColor: const Color.fromARGB(255, 241, 241, 241)),
@@ -31,9 +35,9 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: Color.fromARGB(255, 13, 13, 13),
+      backgroundColor: bgColor,
       body: Padding(
-        padding: EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(4.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,

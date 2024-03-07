@@ -1,6 +1,7 @@
 import 'package:contact_app/components/drop_down_button.dart';
 import 'package:contact_app/components/icon_button.dart';
 import 'package:contact_app/components/list_tile.dart';
+import 'package:contact_app/contrast.dart';
 import 'package:contact_app/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
@@ -69,13 +70,13 @@ class MyContact extends StatelessWidget {
               children: [
                 const Text(
                   "392 TOTAL",
-                  style: TextStyle(color: Color(0xff3C3C3C)),
+                  style: TextStyle(color: subTextColor),
                 ),
                 const Text(
                   "Contacts",
                   style: TextStyle(
                     fontSize: 20,
-                    color: Colors.white,
+                    color: textColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -119,8 +120,8 @@ class MyContact extends StatelessWidget {
                       Spacer(),
                       MyIconButton(
                         icon: Icons.list_alt,
-                        foregroundColor: Colors.white,
-                        backgroundColor: Colors.grey,
+                        foregroundColor: textColor,
+                        backgroundColor: bgTileColor,
                       ),
                       MyIconButton(
                         icon: Icons.grid_4x4_outlined,
@@ -142,8 +143,7 @@ class MyContact extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 12.0, top: 24.0),
                 child: Text(
                   groupByValue.toUpperCase(),
-                  style: const TextStyle(
-                      color: Color.fromARGB(255, 130, 130, 130)),
+                  style: const TextStyle(color: subTextColor),
                 ),
               ),
               itemBuilder: (context, user) {
