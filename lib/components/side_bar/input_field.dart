@@ -12,7 +12,7 @@ class MyInputField extends StatelessWidget {
       decoration: const InputDecoration(
           prefixIcon: Icon(Icons.search),
           hintText: "Search",
-          hintStyle: TextStyle(fontWeight: FontWeight.bold),
+          hintStyle: TextStyle(fontWeight: FontWeight.w600),
           border: OutlineInputBorder(
               borderSide: BorderSide(
                 color: borderColor,

@@ -20,6 +20,7 @@ class MyDropDownButton extends StatelessWidget {
         child: DropdownButtonHideUnderline(
           child: DropdownButton(
             value: currentValue,
+            borderRadius: const BorderRadius.all(Radius.circular(6)),
             dropdownColor: const Color.fromARGB(255, 44, 44, 44),
             style: const TextStyle(color: Colors.white),
             iconEnabledColor: Colors.white,

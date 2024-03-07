@@ -31,12 +31,6 @@ class _MySideBarState extends State<MySideBar> {
 
   List<SideBarItemModel> filterSideBarItemModel = [];
 
-  void reset() {
-    setState(() {
-      filterSideBarItemModel = [...listSideBarItemModel];
-    });
-  }
-
   @override
   void initState() {
     super.initState();

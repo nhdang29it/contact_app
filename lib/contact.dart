@@ -41,7 +41,7 @@ List<User> listUser = const [
       email: "vinh@gmail.com",
       phoneNumber: "0123456789",
       avatarUrl: "",
-      group: "V"),
+      group: "1"),
   User(
       name: "vo phong vu",
       description: "IT helpdesk",
@@ -60,19 +60,17 @@ class MyContact extends StatelessWidget {
       flex: 4,
       child: Column(
         children: [
-          Container(
-            // color: Colors.redAccent,
-            margin: const EdgeInsets.symmetric(horizontal: 6.0),
-            height: 120,
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   "392 TOTAL",
                   style: TextStyle(color: subTextColor),
                 ),
-                const Text(
+                Text(
                   "Contacts",
                   style: TextStyle(
                     fontSize: 20,
@@ -80,12 +78,9 @@ class MyContact extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const Spacer(),
-                Container(
-                  height: 60,
-                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                  // color: Colors.amber,
-                  child: const Row(
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8.0),
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       MyDropDownButton(
@@ -142,7 +137,7 @@ class MyContact extends StatelessWidget {
               groupSeparatorBuilder: (String groupByValue) => Padding(
                 padding: const EdgeInsets.only(left: 12.0, top: 24.0),
                 child: Text(
-                  groupByValue.toUpperCase(),
+                  groupByValue == "1" ? "PINNED" : groupByValue.toUpperCase(),
                   style: const TextStyle(color: subTextColor),
                 ),
               ),
