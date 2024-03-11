@@ -1,5 +1,6 @@
 import 'package:contact_app/contact.dart';
 import 'package:contact_app/contrast.dart';
+import 'package:contact_app/responsive.dart';
 import 'package:contact_app/side_bar.dart';
 import 'package:contact_app/upcomming_activity.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       themeMode: ThemeMode.dark,
+      debugShowCheckedModeBanner: false,
       darkTheme: ThemeData.dark(
         useMaterial3: true,
       ),
@@ -29,22 +31,83 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
   @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final GlobalKey<ScaffoldState> key = GlobalKey();
+
+  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      key: key,
       backgroundColor: bgColor,
+      appBar: Responsive.isDesktop(context)
+          ? null
+          : AppBar(
+              scrolledUnderElevation: 0,
+              backgroundColor: bgColor,
+              title: const Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "392 TOTAL",
+                    style: TextStyle(color: subTextColor, fontSize: 12),
+                  ),
+                  Text(
+                    "Contacts",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: textColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              actions: Responsive.isMobile(context)
+                  ? [
+                      IconButton(
+                          onPressed: () {
+                            key.currentState!.openEndDrawer();
+                          },
+                          icon: const Icon(Icons.info_outline))
+                    ]
+                  : null,
+            ),
+      drawer: Responsive.isDesktop(context)
+          ? null
+          : const Drawer(
+              child: MySideBar(),
+            ),
+      endDrawer: !Responsive.isMobile(context)
+          ? null
+          : const Drawer(
+              width: 380,
+              child: MyUpcommingActivity(),
+            ),
+      // endDrawer: Drawer(
+      //   child: ListView(
+      //     children: [
+      //       Text("dsfsdf"),
+      //     ],
+      //   ),
+      // ),
       body: Padding(
-        padding: EdgeInsets.all(4.0),
+        padding: const EdgeInsets.all(4.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            MySideBar(),
-            MyContact(),
-            MyUpcommingActivity(),
+            if (Responsive.isDesktop(context))
+              const Expanded(flex: 2, child: MySideBar()),
+            const MyContact(),
+            if (Responsive.isDesktop(context) || Responsive.isTablet(context))
+              const Expanded(flex: 4, child: MyUpcommingActivity()),
           ],
         ),
       ),

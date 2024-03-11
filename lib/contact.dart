@@ -3,6 +3,7 @@ import 'package:contact_app/components/icon_button.dart';
 import 'package:contact_app/components/list_tile.dart';
 import 'package:contact_app/contrast.dart';
 import 'package:contact_app/models/user.dart';
+import 'package:contact_app/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 
@@ -60,24 +61,26 @@ class MyContact extends StatelessWidget {
       flex: 4,
       child: Column(
         children: [
-          const Padding(
+          Padding(
             padding: EdgeInsets.all(8.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "392 TOTAL",
-                  style: TextStyle(color: subTextColor),
-                ),
-                Text(
-                  "Contacts",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: textColor,
-                    fontWeight: FontWeight.bold,
+                if (Responsive.isDesktop(context))
+                  Text(
+                    "392 TOTAL",
+                    style: TextStyle(color: subTextColor),
                   ),
-                ),
+                if (Responsive.isDesktop(context))
+                  Text(
+                    "Contacts",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: textColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 8.0),
                   child: Row(

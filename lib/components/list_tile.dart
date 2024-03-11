@@ -1,3 +1,4 @@
+import 'package:contact_app/contrast.dart';
 import 'package:flutter/material.dart';
 
 class MyListTile extends StatelessWidget {
@@ -25,9 +26,9 @@ class MyListTile extends StatelessWidget {
     return Container(
       height: 70,
       margin: const EdgeInsets.symmetric(horizontal: 12.0),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(
-          bottom: BorderSide(color: textColor),
+          bottom: BorderSide(color: borderColor, width: 1.5),
         ),
       ),
       child: Row(

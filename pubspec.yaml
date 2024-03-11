@@ -37,7 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   grouped_list: ^5.1.2
   timeline_tile: ^2.0.0
-  sidebarx: ^0.16.3
+  # sidebarx: ^0.16.3
+  easy_sidemenu: ^0.5.0
 
 dev_dependencies:
   flutter_test:
