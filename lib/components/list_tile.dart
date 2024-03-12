@@ -23,62 +23,65 @@ class MyListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 70,
-      margin: const EdgeInsets.symmetric(horizontal: 12.0),
-      decoration: const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(color: borderColor, width: 1.5),
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        height: 70,
+        margin: const EdgeInsets.symmetric(horizontal: 12.0),
+        decoration: const BoxDecoration(
+          border: Border(
+            bottom: BorderSide(color: borderColor, width: 1.5),
+          ),
         ),
-      ),
-      child: Row(
-        children: [
-          CircleAvatar(
-            child: Text(avatarUrl),
-          ),
-          const SizedBox(
-            width: 8,
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  firstFieldTitle,
-                  style: TextStyle(color: textColor),
-                ),
-                Text(
-                  firstFieldSubTitle,
-                  style: TextStyle(color: textColor),
-                ),
-              ],
+        child: Row(
+          children: [
+            CircleAvatar(
+              child: Text(avatarUrl),
             ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  secondFieldTitle,
-                  style: TextStyle(color: textColor),
-                ),
-                Text(
-                  secondFieldSubtitle,
-                  style: TextStyle(color: textColor),
-                ),
-              ],
+            const SizedBox(
+              width: 8,
             ),
-          ),
-          Icon(
-            Icons.more,
-            color: textColor,
-          ),
-          const SizedBox(
-            width: 5,
-          ),
-        ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    firstFieldTitle,
+                    style: TextStyle(color: textColor),
+                  ),
+                  Text(
+                    firstFieldSubTitle,
+                    style: TextStyle(color: textColor),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    secondFieldTitle,
+                    style: TextStyle(color: textColor),
+                  ),
+                  Text(
+                    secondFieldSubtitle,
+                    style: TextStyle(color: textColor),
+                  ),
+                ],
+              ),
+            ),
+            Icon(
+              Icons.more,
+              color: textColor,
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+          ],
+        ),
       ),
     );
   }

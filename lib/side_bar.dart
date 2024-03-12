@@ -2,7 +2,6 @@ import 'package:contact_app/components/side_bar/input_field.dart';
 import 'package:contact_app/components/side_bar/sidebar_list_tile.dart';
 import 'package:contact_app/contrast.dart';
 import 'package:contact_app/models/side_bar_item.dart';
-import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
 
 class MySideBar extends StatefulWidget {
@@ -16,8 +15,6 @@ class _MySideBarState extends State<MySideBar> {
   final double listTileFontSize = 14;
 
   final FontWeight listTileFontWeight = FontWeight.w600;
-
-  final SideMenuController sideMenuController = SideMenuController();
 
   String currentTitle = "";
 

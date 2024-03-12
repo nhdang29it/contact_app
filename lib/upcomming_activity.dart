@@ -2,12 +2,13 @@ import 'package:contact_app/components/button.dart';
 import 'package:contact_app/components/drop_down_button.dart';
 import 'package:contact_app/components/upcomming_activity/list_activity.dart';
 import 'package:contact_app/contrast.dart';
+import 'package:contact_app/cubits/app/app_cubit.dart';
+import 'package:contact_app/responsive.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyUpcommingActivity extends StatelessWidget {
   const MyUpcommingActivity({super.key});
-
-  // final Color textColor = Colors.white;
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +19,29 @@ class MyUpcommingActivity extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            "Upcoming Activity",
-            style: TextStyle(
-                color: textColor, fontSize: 20, fontWeight: FontWeight.w600),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              if (!Responsive.isMobile(context))
+                IconButton(
+                  onPressed: () {
+                    context.read<AppCubit>().toggleRightSideBar();
+                  },
+                  icon: const Icon(Icons.arrow_back_ios),
+                ),
+              const SizedBox(
+                width: 5,
+              ),
+              const Text(
+                "Upcoming Activity",
+                style: TextStyle(
+                    color: textColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600),
+              )
+            ],
           ),
           const SizedBox(
             height: 10,

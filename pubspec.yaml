@@ -38,7 +38,8 @@ dependencies:
   grouped_list: ^5.1.2
   timeline_tile: ^2.0.0
   # sidebarx: ^0.16.3
-  easy_sidemenu: ^0.5.0
+  # easy_sidemenu: ^0.5.0
+  flutter_bloc: ^8.1.4
 
 dev_dependencies:
   flutter_test:

@@ -2,9 +2,11 @@ import 'package:contact_app/components/drop_down_button.dart';
 import 'package:contact_app/components/icon_button.dart';
 import 'package:contact_app/components/list_tile.dart';
 import 'package:contact_app/contrast.dart';
+import 'package:contact_app/cubits/app/app_cubit.dart';
 import 'package:contact_app/models/user.dart';
 import 'package:contact_app/responsive.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grouped_list/grouped_list.dart';
 
 List<User> listUser = const [
@@ -62,18 +64,18 @@ class MyContact extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 if (Responsive.isDesktop(context))
-                  Text(
+                  const Text(
                     "392 TOTAL",
                     style: TextStyle(color: subTextColor),
                   ),
                 if (Responsive.isDesktop(context))
-                  Text(
+                  const Text(
                     "Contacts",
                     style: TextStyle(
                       fontSize: 20,
@@ -81,7 +83,7 @@ class MyContact extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.symmetric(vertical: 8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -151,6 +153,9 @@ class MyContact extends StatelessWidget {
                   secondFieldTitle: user.phoneNumber,
                   firstFieldTitle: user.email,
                   avatarUrl: user.group,
+                  onTap: () {
+                    context.read<AppCubit>().openRightSideBar();
+                  },
                 );
               },
             ),
