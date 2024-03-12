@@ -15,7 +15,7 @@ class MyUpcommingActivity extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
       decoration: const BoxDecoration(
-        color: Color.fromARGB(189, 105, 105, 105),
+        color: Color.fromARGB(200, 56, 56, 56),
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
       child: Column(
