@@ -69,12 +69,12 @@ class MyContact extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (Responsive.isDesktop(context))
+                if (!Responsive.isMobile(context))
                   const Text(
                     "392 TOTAL",
                     style: TextStyle(color: subTextColor),
                   ),
-                if (Responsive.isDesktop(context))
+                if (!Responsive.isMobile(context))
                   const Text(
                     "Contacts",
                     style: TextStyle(

@@ -29,7 +29,7 @@ class MyUpcommingActivity extends StatelessWidget {
                   onPressed: () {
                     context.read<AppCubit>().toggleRightSideBar();
                   },
-                  icon: const Icon(Icons.arrow_back_ios),
+                  icon: const Icon(Icons.arrow_forward_ios),
                 ),
               const SizedBox(
                 width: 5,

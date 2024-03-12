@@ -1,3 +1,4 @@
+import 'package:contact_app/components/side_bar/navigation_rail.dart';
 import 'package:contact_app/contact.dart';
 import 'package:contact_app/contrast.dart';
 import 'package:contact_app/cubits/app/app_cubit.dart';
@@ -5,6 +6,7 @@ import 'package:contact_app/responsive.dart';
 import 'package:contact_app/side_bar.dart';
 import 'package:contact_app/upcomming_activity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
@@ -53,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
         return Scaffold(
           key: key,
           backgroundColor: bgColor,
-          appBar: Responsive.isDesktop(context)
+          appBar: !Responsive.isMobile(context)
               ? null
               : AppBar(
                   scrolledUnderElevation: 0,
@@ -89,12 +91,13 @@ class _MyHomePageState extends State<MyHomePage> {
           drawer: !Responsive.isMobile(context)
               ? null
               : const Drawer(
+                  width: 240,
                   child: MySideBar(),
                 ),
           endDrawer: !Responsive.isMobile(context)
               ? null
               : const Drawer(
-                  width: 380,
+                  width: 360,
                   child: MyUpcommingActivity(),
                 ),
           body: Padding(
@@ -103,11 +106,23 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (!Responsive.isMobile(context) && state.isOpenLeftSide)
-                  const Expanded(flex: 2, child: MySideBar()),
+                // if (!Responsive.isMobile(context) && state.isOpenLeftSide)
+                //   const Expanded(flex: 2, child: MySideBar()),
+                if (!Responsive.isMobile(context))
+                  state.isOpenLeftSide
+                      ? const MySideBar(
+                          width: 240,
+                        )
+                      : const MyNavigationRail(
+                          destinations: [],
+                          selectedIndex: 0,
+                          listSideBarItemModel: listSideBarItemModel,
+                        ),
                 const MyContact(),
                 if (!Responsive.isMobile(context) && state.isOpenRightSide)
-                  const Expanded(flex: 4, child: MyUpcommingActivity()),
+                  Expanded(
+                      flex: 4,
+                      child: const MyUpcommingActivity().animate().fadeIn()),
               ],
             ),
           ),

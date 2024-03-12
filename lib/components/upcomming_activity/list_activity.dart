@@ -66,20 +66,26 @@ class ListActivity extends StatelessWidget {
             ),
             padding: const EdgeInsets.only(top: 6.0),
             // color: Color.fromARGB(255, 190, 190, 190),
-            child: const Wrap(
+            child: Wrap(
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
-                Text("Call "),
-                CircleAvatar(
+                const Text("Call "),
+                const CircleAvatar(
                   child: Text("D"),
                 ),
-                Text(" nguyen hai dang "),
-                Text(" discuss dribbble shots "),
-                Chip(
+                const Text(" nguyen hai dang "),
+                const Text(" discuss dribbble shots "),
+                Transform(
+                  transform: Matrix4.identity()..scale(0.96),
+                  child: const Chip(
                     label: Text(
-                  " 03.12, 11:00AM ",
-                  style: TextStyle(fontSize: 12),
-                ))
+                      "03.12, 11:00AM",
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    materialTapTargetSize: MaterialTapTargetSize.padded,
+                    deleteIcon: Icon(Icons.delete),
+                  ),
+                )
               ],
             ),
           ),

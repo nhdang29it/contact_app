@@ -1,11 +1,16 @@
 import 'package:contact_app/components/side_bar/input_field.dart';
 import 'package:contact_app/components/side_bar/sidebar_list_tile.dart';
 import 'package:contact_app/contrast.dart';
+import 'package:contact_app/cubits/app/app_cubit.dart';
 import 'package:contact_app/models/side_bar_item.dart';
+import 'package:contact_app/responsive.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MySideBar extends StatefulWidget {
-  const MySideBar({super.key});
+  const MySideBar({this.width, super.key});
+
+  final double? width;
 
   @override
   State<MySideBar> createState() => _MySideBarState();
@@ -40,12 +45,22 @@ class _MySideBarState extends State<MySideBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: widget.width,
       decoration: const BoxDecoration(
-          // color: Colors.blue,
           border: Border(right: BorderSide(color: borderColor))),
       padding: const EdgeInsets.only(right: 8),
       child: Column(
         children: [
+          if (!Responsive.isMobile(context))
+            Align(
+              alignment: Alignment.centerRight,
+              child: IconButton(
+                onPressed: () {
+                  context.read<AppCubit>().closeLeftSideBar();
+                },
+                icon: const Icon(Icons.menu),
+              ),
+            ),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -147,7 +162,11 @@ class _MySideBarState extends State<MySideBar> {
                         backgroundColor: Colors.blue,
                         foregroundColor: Colors.white,
                         elevation: 0,
-                        fixedSize: const Size(double.infinity, 50),
+                        minimumSize: const Size(100, 50),
+                        fixedSize: Responsive.isMobile(context)
+                            ? const Size(double.infinity, 50)
+                            : null,
+                        maximumSize: const Size(180, 120),
                       ),
                       child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -166,9 +185,11 @@ class _MySideBarState extends State<MySideBar> {
             leading: CircleAvatar(
               child: Text("D"),
             ),
-            title: Text(
-              "Dexter Adams",
-              style: TextStyle(color: textColor),
+            title: FittedBox(
+              child: Text(
+                "Dexter Adams ss",
+                style: TextStyle(color: textColor),
+              ),
             ),
             trailing: Icon(
               Icons.settings,
