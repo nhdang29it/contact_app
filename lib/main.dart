@@ -2,6 +2,7 @@ import 'package:contact_app/components/side_bar/navigation_rail.dart';
 import 'package:contact_app/contact.dart';
 import 'package:contact_app/contrast.dart';
 import 'package:contact_app/cubits/app/app_cubit.dart';
+import 'package:contact_app/cubits/side_bar/side_bar_cubit.dart';
 import 'package:contact_app/responsive.dart';
 import 'package:contact_app/side_bar.dart';
 import 'package:contact_app/upcomming_activity.dart';
@@ -18,8 +19,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AppCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => AppCubit()),
+        BlocProvider(create: (context) => SideBarCubit()),
+      ],
       child: MaterialApp(
         title: 'Flutter Demo',
         themeMode: ThemeMode.dark,

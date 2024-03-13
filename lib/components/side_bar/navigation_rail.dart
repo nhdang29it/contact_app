@@ -1,5 +1,6 @@
 import 'package:contact_app/contrast.dart';
 import 'package:contact_app/cubits/app/app_cubit.dart';
+import 'package:contact_app/cubits/side_bar/side_bar_cubit.dart';
 import 'package:contact_app/models/side_bar_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,6 +18,9 @@ class MyNavigationRail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // print("change state");
+    final appStateWatch = context.watch<SideBarCubit>();
+
     return NavigationRail(
       leading: IconButton(
         onPressed: () {
@@ -40,7 +44,10 @@ class MyNavigationRail extends StatelessWidget {
         ),
       ),
       backgroundColor: bgColor,
-      destinations: listSideBarItemModel
+      onDestinationSelected: (index) {
+        context.read<SideBarCubit>().changeIndex(index);
+      },
+      destinations: appStateWatch.state.listSideBarItemModel
           .map(
             (e) => NavigationRailDestination(
               icon: Tooltip(
@@ -58,7 +65,7 @@ class MyNavigationRail extends StatelessWidget {
             ),
           )
           .toList(),
-      selectedIndex: selectedIndex,
+      selectedIndex: appStateWatch.state.currentSelected,
     );
   }
 }

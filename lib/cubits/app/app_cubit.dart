@@ -34,4 +34,8 @@ class AppCubit extends Cubit<AppCubitState> {
     if (state.isOpenLeftSide == false) return;
     emit(state.copyWith(isOpenLeftSide: false));
   }
+
+  // void changeIndex(int index) {
+  //   emit(state.copyWith(currentSelected: index));
+  // }
 }
